@@ -1,0 +1,38 @@
+@mixin button($buttonsize:"100px",$hitarea: $buttonsize)
+  position: absolute
+  width: $buttonsize
+  height: $buttonsize
+  margin-left: -($buttonsize/2)
+  .btn
+    position: absolute
+    z-index: 1
+    cursor: pointer
+    width: $hitarea
+    height: $hitarea
+    margin-left: ($buttonsize - $hitarea)/2
+    margin-top: ($buttonsize - $hitarea)/2
+    border-radius: ($hitarea/2)
+    +box-shadow(0 0 90px 75px rgba(0,0,0,.3))
+
+@mixin app
+  font-size: 14px
+  display: block
+  width: 100%
+  height: 100%
+  background-size: cover
+  +box-shadow(inset 0 0 90px 75px rgba(0,0,0,.3))
+  #test
+    +button(76px,54px)
+    +border-radius(54px)
+    top: 8%
+    right: 50%
+    background-color: red
+  #frame
+    border: #b1812c solid 3px
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: 1
+    pointer-events: none

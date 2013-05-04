@@ -1,0 +1,22 @@
+!!!
+%html.original
+  %head
+    %meta{name: "viewport", content: "initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width"}/
+    %title Test
+    //%link{rel: "stylesheet", href: "css/fonts/kc/stylesheet.css" }
+    %link{rel: "stylesheet", href: "css/application.css" } 
+    //%script{src: "js/livereload.js?port=35729"}
+  %body
+    #container
+      %header
+      #main{role: "main"}
+        = yield
+      %footer
+  %script{src: "//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"}
+  %script
+    window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>');
+  %script
+    $(function() { $("footer").text(window.WebSocket.OPEN); });
+  %script{src: "js/mylibs/helper.js"}
+  %script
+    MBP.scaleFix();
