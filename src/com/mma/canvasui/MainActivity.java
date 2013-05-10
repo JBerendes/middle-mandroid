@@ -37,7 +37,7 @@ public class MainActivity extends Activity implements CordovaInterface {
 	    /** Show a toast from the web page */
 //	    @JavascriptInterface
 	    public void TestMethod() {
-	        mainView.loadUrl("javascript:try{cordova.fireDocumentEvent('pause');}catch(e){console.log('exception firing pause event from native');};");
+	        mainView.loadUrl("javascript:MBP.updateContent('NUUUUUUUUUUUUT GOBLIN!');");
 	    }
 	}
 	

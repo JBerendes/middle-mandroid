@@ -23,6 +23,7 @@ $(".btn").click(function(){
 MBP.updateContent = function(sometext){
     $('.content').text(sometext);
 }
+
 // Fix for iPhone viewport scale bug 
 // http://www.blog.highub.com/mobile-2/a-fix-for-iphone-viewport-scale-bug/
 
