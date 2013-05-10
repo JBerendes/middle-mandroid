@@ -16,6 +16,10 @@ if(navigator.userAgent.indexOf("Chrome") == -1) {
 
 window.MBP = window.MBP || {}; 
 
+$(".btn").click(function(){
+	activity.TestMethod();
+});
+
 // Fix for iPhone viewport scale bug 
 // http://www.blog.highub.com/mobile-2/a-fix-for-iphone-viewport-scale-bug/
 
