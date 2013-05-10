@@ -14,7 +14,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.widget.Toast;
 
 public class MainActivity extends Activity implements CordovaInterface {
 	
@@ -37,14 +36,13 @@ public class MainActivity extends Activity implements CordovaInterface {
 
 	    /** Show a toast from the web page */
 //	    @JavascriptInterface
-	    public void showToast(String toast) {
-	        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
+	    public void TestMethod() {
+	        mainView.loadUrl("javascript:try{cordova.fireDocumentEvent('pause');}catch(e){console.log('exception firing pause event from native');};");
 	    }
 	}
 	
     String TAG = "MainActivity-ActionBarTest";
 
-    // WAT-age
     private CordovaPlugin activityResultCallback;
     private Object activityResultKeepRunning;
     private Object keepRunning;
