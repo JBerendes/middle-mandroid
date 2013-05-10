@@ -7,41 +7,59 @@ import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.api.CordovaInterface;
 import org.apache.cordova.api.CordovaPlugin;
 import org.apache.cordova.api.LOG;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
-import org.apache.cordova.api.CordovaInterface;
-
-
-
-import android.webkit.WebView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity implements CordovaInterface {
+	
     private final ExecutorService threadPool = Executors.newCachedThreadPool();
-    private boolean mAlternateTitle = false;
-    private boolean bound;
-    private boolean volumeupBound;
-    private boolean volumedownBound;
+//    
+//    private boolean mAlternateTitle = false;
+//    private boolean bound;
+//    private boolean volumeupBound;
+//    private boolean volumedownBound;
  
+	
+	public class WebAppInterface {
+
+		Context mContext;
+
+	    /** Instantiate the interface and set the context */
+	    WebAppInterface(Context c) {
+	        mContext = c;
+	    }
+
+	    /** Show a toast from the web page */
+//	    @JavascriptInterface
+	    public void showToast(String toast) {
+	        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
+	    }
+	}
+	
     String TAG = "MainActivity-ActionBarTest";
+
+    // WAT-age
     private CordovaPlugin activityResultCallback;
     private Object activityResultKeepRunning;
     private Object keepRunning;
  
     CordovaWebView mainView;
 
-    @Override
+    @SuppressLint("SetJavaScriptEnabled")
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainView = (CordovaWebView) findViewById(R.id.webview);
         mainView.getSettings().setJavaScriptEnabled(true);
         mainView.getSettings().setUserAgentString("Android");
+        mainView.addJavascriptInterface(new WebAppInterface(this), "AutoFugue");
     }
 
     @Override
@@ -91,13 +109,6 @@ public class MainActivity extends Activity implements CordovaInterface {
 		return this;
 	}
 	
-	@Override
-	@Deprecated
-    public Context getContext() {
-        return this;
-	}
-	
-	@Override
     /**
      * Called when an activity you launched exits, giving you the requestCode you started it with,
      * the resultCode it returned, and any additional data from it.
@@ -107,6 +118,7 @@ public class MainActivity extends Activity implements CordovaInterface {
      * @param resultCode        The integer result code returned by the child activity through its setResult().
      * @param data              An Intent, which can return result data to the caller (various data can be attached to Intent "extras").
      */
+	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         CordovaPlugin callback = this.activityResultCallback;
@@ -133,9 +145,9 @@ public class MainActivity extends Activity implements CordovaInterface {
 
 	@Override
 	public ExecutorService getThreadPool() {
-		// TODO Auto-generated method stub
-		return null;
+		return threadPool;
 	}
+	
 	@Override
     /**
      * Called when the system is about to start resuming a previous activity.
@@ -203,4 +215,9 @@ public class MainActivity extends Activity implements CordovaInterface {
             this.mainView.pluginManager.onNewIntent(intent);
         }
     }
+
+	@Override
+	public Context getContext() {
+		return this;
+	}
 }
