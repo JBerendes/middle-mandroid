@@ -17,7 +17,7 @@ if(navigator.userAgent.indexOf("Chrome") == -1) {
 window.MBP = window.MBP || {}; 
 
 $(".btn").click(function(){
-	activity.TestMethod();
+	AutoFugue.TestMethod();
 });
 
 MBP.updateContent = function(sometext){
